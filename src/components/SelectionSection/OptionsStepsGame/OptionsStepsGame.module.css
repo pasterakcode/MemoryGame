@@ -1,0 +1,11 @@
+.OptionsStepsGame .options {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid black;
+}
+.OptionsStepsGame {
+    display: flex;
+    justify-content: center;
+}

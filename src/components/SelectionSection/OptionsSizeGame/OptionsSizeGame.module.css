@@ -1,0 +1,24 @@
+.OptionsSizeGame {
+    border-bottom: 1px solid white;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.selectionCard {
+    height: 50px;
+    width: 50px;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: .5rem;
+    background-color: white;
+}
+.selectionCard span {
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}

@@ -1,0 +1,32 @@
+.footerBar {
+    background-color: lime;
+    position: absolute;
+    width: 80vw;
+    height: 2rem;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footerBar::after {
+    content: ' ';
+    position: absolute;
+    left: -3rem;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 2rem solid lime;
+    border-left: 3rem solid transparent;
+}
+.footerBar::before {
+    content: ' ';
+    position: absolute;
+    right: -3rem;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 2rem solid lime;
+    border-right: 3rem solid transparent;
+}

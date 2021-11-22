@@ -1,0 +1,32 @@
+.headerBar {
+    position: absolute;
+    width: 80vw;
+    background-color: tomato;
+    height: 2rem;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.headerBar::after {
+    content: ' ';
+    position: absolute;
+    left: -3rem;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-top: 2rem solid tomato;
+    border-left: 3rem solid transparent;
+}
+.headerBar::before {
+    content: ' ';
+    position: absolute;
+    right: -3rem;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-top: 2rem solid tomato;
+    border-right: 3rem solid transparent;
+}
