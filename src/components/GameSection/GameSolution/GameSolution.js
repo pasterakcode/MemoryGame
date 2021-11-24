@@ -10,14 +10,14 @@ function GameSolution ( {onHandleSelectedCard} ) {
 		<div className={styles.game}>
 			<div className={styles.steps}>
 				{gameSteps.map(id => (
-					<div className={`${styles.oneStep}`} id={`step.${id}`}>
+					<div className={`${styles.oneStep}`} key={id} id={`step.${id}`}>
 						{id}
 					</div>
 				))}
 			</div>
 			<div className={styles.gameArea}>
-				{gameSize.map(id => (
-					<div className={styles.oneCard} id={`card.${id}`} onClick={(e) => onHandleSelectedCard(e)}></div>
+				{gameSize.map((id, i) => (
+					<div className={styles.oneCard} key={id} id={`card.${id}`} onClick={(e) => onHandleSelectedCard(e)}></div>
 				))}
 			</div>
 		</div>

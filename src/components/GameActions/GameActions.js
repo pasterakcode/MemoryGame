@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './GameActions.module.css';
 
-function GameActions() {
+function GameActions( { onHandleStartGame } ) {
 	return (
 		<div className={styles.gameActions}>
-			<button>Start</button>
+			<button onClick={onHandleStartGame}>Start</button>
 			<button>Reset</button>
 		</div>
 	);

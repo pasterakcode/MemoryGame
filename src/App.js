@@ -1,3 +1,4 @@
+import react, { useState } from 'react';
 import styles from './App.module.css';
 import Header from './components/Header/Header';
 import SelectionSection from './components/SelectionSection/SelectionSection';
@@ -5,15 +6,20 @@ import GameSection from './components/GameSection/GameSection';
 import Footer from './components/Footer/Footer';
 import GameActions from './components/GameActions/GameActions';
 
-
 function App() {
+	const [startGame, setStartGame] = useState(false);
+
+	const handleStartGame = () => {
+		setStartGame(!startGame);
+	};
+
 	return (
 		<div className={`${styles.app} container`}>
 			<Header />
 			<div className={`${styles.mainSection}`}>
 				<SelectionSection />
-        <GameActions/>
-				<GameSection />
+				<GameActions onHandleStartGame={handleStartGame} />
+				<GameSection startGame={startGame} />
 			</div>
 			<Footer />
 		</div>
