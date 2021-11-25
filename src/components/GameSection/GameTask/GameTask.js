@@ -1,40 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './GameTask.module.css';
 
-function GameTask({ selectedCard, startGame }) {
+function GameTask({
+	startGame,
+	gameLevel,
+	onHandleGameLevel,
+	cardsToFind,
+	onHandleCardsToFind,
+}) {
 	const gameSize = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 	const gameSteps = [1, 2, 3, 4, 5, 6];
-	const [cardsToFind, setCardsToFind] = useState([]);
-	const [gameLevel, setGameLevel] = useState(0);
 	const cards = useRef(gameSize.map(() => React.createRef()));
 	const steps = useRef(gameSteps.map(() => React.createRef()));
 
 	useEffect(() => {
-		if (selectedCard != []) {
-			console.log(selectedCard);
-			console.log(cardsToFind);
-			// znajdz rozwiązanie problemu -> porównanie dwóch tablic
-			if (selectedCard == cardsToFind){
-				console.log('OK')
-				setGameLevel(gameLevel => gameLevel + 1);
-			} else {
-				console.log('NOK')
-			}
-			// do poprawy sprawdzanie aktywnych kart do zlanezienia
-		}
-	}, [selectedCard]);
-
-	useEffect(() => {
 		if (startGame) {
-			setGameLevel(1);
+			onHandleGameLevel();
+		} else {
+			clearMarkedAllSteps();
 		}
 	}, [startGame]);
 
 	useEffect(() => {
 		if (gameLevel > 0) {
 			let newCardToRemember = getRandomInt(gameSize.length);
-			console.log(newCardToRemember);
-			setCardsToFind(prev => [...prev, newCardToRemember]);
+			onHandleCardsToFind(newCardToRemember);
 		}
 	}, [gameLevel]);
 
@@ -42,32 +32,46 @@ function GameTask({ selectedCard, startGame }) {
 		oneGame(gameLevel);
 	}, [cardsToFind]);
 
-	function getRandomInt(max) {
-		return Math.floor((Math.random() * max) + 1);
-	}
+	const getRandomInt = max => {
+		return Math.floor(Math.random() * max + 1);
+	};
 	const waitFor = ms => new Promise(r => setTimeout(r, ms));
-	async function asyncForEach(array, callback) {
+	const asyncForEach = async (array, callback) => {
 		for (let index = 0; index < array.length; index++) {
 			await callback(array[index], index, array);
 		}
-	}
-	const oneGame = async lvl => {
+	};
+	const oneGame = async newLevel => {
 		let counter = 0;
 		await asyncForEach(cardsToFind, async cardToFindInThisStep => {
-			if (counter <= lvl) {
-				await waitFor(500);
-				steps.current[counter].current.style.backgroundColor = 'green';
-				cards.current[cardToFindInThisStep - 1].current.style.backgroundColor =
-					'green';
+			newLevel > 1 && markStepOnGreen(newLevel - 2);
+			if (counter <= newLevel) {
+				await waitFor(750);
+				markStepOnYellow(newLevel - 1);
+				markCardOnGreen(cardToFindInThisStep - 1);
 				await waitFor(1000);
-				cards.current[cardToFindInThisStep - 1].current.style.backgroundColor =
-					'transparent';
+				clearMarkedCard(cardToFindInThisStep - 1);
 				counter++;
-				console.log(cardsToFind);
 			}
 		});
 	};
-
+	const markStepOnYellow = id => {
+		steps.current[id].current.style.backgroundColor = 'yellow';
+	};
+	const markStepOnGreen = id => {
+		steps.current[id].current.style.backgroundColor = 'green';
+	};
+	const clearMarkedAllSteps = () => {
+		steps.current.forEach(el => {
+			el.current.style.backgroundColor = 'white';
+		});
+	};
+	const markCardOnGreen = id => {
+		cards.current[id].current.style.backgroundColor = 'green';
+	};
+	const clearMarkedCard = id => {
+		cards.current[id].current.style.backgroundColor = 'transparent';
+	};
 	return (
 		<div className={styles.game}>
 			<div className={styles.steps}>
