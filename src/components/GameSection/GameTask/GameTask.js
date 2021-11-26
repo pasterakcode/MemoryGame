@@ -23,7 +23,8 @@ function GameTask({
 
 	useEffect(() => {
 		if (gameLevel > 0) {
-			let newCardToRemember = getRandomInt(gameSize.length);
+			let newCardToRemember = cards.current[getRandomInt(gameSize.length)].current;
+			console.log(newCardToRemember);
 			onHandleCardsToFind(newCardToRemember);
 		}
 	}, [gameLevel]);
@@ -33,7 +34,7 @@ function GameTask({
 	}, [cardsToFind]);
 
 	const getRandomInt = max => {
-		return Math.floor(Math.random() * max + 1);
+		return Math.floor(Math.random() * max);
 	};
 	const waitFor = ms => new Promise(r => setTimeout(r, ms));
 	const asyncForEach = async (array, callback) => {
@@ -48,9 +49,9 @@ function GameTask({
 			if (counter <= newLevel) {
 				await waitFor(750);
 				markStepOnYellow(newLevel - 1);
-				markCardOnGreen(cardToFindInThisStep - 1);
+				markCardOnGreen(cardToFindInThisStep);
 				await waitFor(1000);
-				clearMarkedCard(cardToFindInThisStep - 1);
+				clearMarkedCard(cardToFindInThisStep);
 				counter++;
 			}
 		});
@@ -66,11 +67,11 @@ function GameTask({
 			el.current.style.backgroundColor = 'white';
 		});
 	};
-	const markCardOnGreen = id => {
-		cards.current[id].current.style.backgroundColor = 'green';
+	const markCardOnGreen = card => {
+		card.style.backgroundColor = 'green';
 	};
-	const clearMarkedCard = id => {
-		cards.current[id].current.style.backgroundColor = 'transparent';
+	const clearMarkedCard = card => {
+		card.style.backgroundColor = 'transparent';
 	};
 	return (
 		<div className={styles.game}>

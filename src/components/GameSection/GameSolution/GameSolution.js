@@ -65,7 +65,7 @@ function GameSolution({
 					<div
 						className={styles.oneCard}
 						key={id}
-						id={`card.${id}`}
+						id={`card.${i}`}
 						ref={cards.current[i]}
 						onClick={handleOnClickCard}
 					></div>

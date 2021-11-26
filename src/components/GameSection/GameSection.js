@@ -29,14 +29,16 @@ function GameSection() {
 		setCardsToFind(prev => [...prev, newCardToRemember]);
 	};
 	const handleSelectedCard = e => {
-		let newSelectedCard = 1 * e.target.attributes.id.value.replace('card.', '');
+		let newSelectedCard = e.target;
 		setSelectedCard(prev => [...prev, newSelectedCard]);
 	};
 
 	useEffect(() => {
 		if (selectedCard.length > 0) {
+			console.log(selectedCard);
+			console.log(cardsToFind);
 			let lastSelected = selectedCard.length - 1;
-			if (selectedCard[lastSelected] === cardsToFind[lastSelected]) {
+			if (selectedCard[lastSelected].id === cardsToFind[lastSelected].id) {
 				console.log(`ok`);
 				setCountCorrectSelected(prev => prev + 1);
 				if (selectedCard.length === cardsToFind.length) {
