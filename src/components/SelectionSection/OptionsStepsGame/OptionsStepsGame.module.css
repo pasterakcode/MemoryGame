@@ -9,3 +9,8 @@
     display: flex;
     justify-content: center;
 }
+.OptionsStepsGame input{
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+}

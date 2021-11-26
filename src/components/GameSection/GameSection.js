@@ -4,7 +4,7 @@ import GameSolution from './GameSolution/GameSolution';
 import GameTask from './GameTask/GameTask';
 import styles from './GameSection.module.css';
 
-function GameSection() {
+function GameSection({ gameAreaSize, allGameLevels }) {
 	const [startGame, setStartGame] = useState(false);
 	const [gameLevel, setGameLevel] = useState(0);
 	const [cardsToFind, setCardsToFind] = useState([]);
@@ -35,8 +35,6 @@ function GameSection() {
 
 	useEffect(() => {
 		if (selectedCard.length > 0) {
-			console.log(selectedCard);
-			console.log(cardsToFind);
 			let lastSelected = selectedCard.length - 1;
 			if (selectedCard[lastSelected].id === cardsToFind[lastSelected].id) {
 				console.log(`ok`);
@@ -63,6 +61,8 @@ function GameSection() {
 				onHandleResetGame={handleResetGame}
 			/>
 			<GameTask
+				gameAreaSize={gameAreaSize}
+				allGameLevels={allGameLevels}
 				selectedCard={selectedCard}
 				startGame={startGame}
 				gameLevel={gameLevel}
@@ -71,6 +71,8 @@ function GameSection() {
 				onHandleCardsToFind={handleCardsToFind}
 			/>
 			<GameSolution
+				gameAreaSize={gameAreaSize}
+				allGameLevels={allGameLevels}
 				onHandleSelectedCard={e => handleSelectedCard(e)}
 				countCorrectSelected={countCorrectSelected}
 				gameLevel={gameLevel}

@@ -2,16 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import styles from './GameTask.module.css';
 
 function GameTask({
+	gameAreaSize,
+	allGameLevels,
 	startGame,
 	gameLevel,
 	onHandleGameLevel,
 	cardsToFind,
 	onHandleCardsToFind,
 }) {
-	const gameSize = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-	const gameSteps = [1, 2, 3, 4, 5, 6];
-	const cards = useRef(gameSize.map(() => React.createRef()));
-	const steps = useRef(gameSteps.map(() => React.createRef()));
+	const cards = useRef(gameAreaSize.map(() => React.createRef()));
+	const steps = useRef(allGameLevels.map(() => React.createRef()));
 
 	useEffect(() => {
 		if (startGame) {
@@ -23,7 +23,8 @@ function GameTask({
 
 	useEffect(() => {
 		if (gameLevel > 0) {
-			let newCardToRemember = cards.current[getRandomInt(gameSize.length)].current;
+			let newCardToRemember =
+				cards.current[getRandomInt(gameAreaSize.length)].current;
 			console.log(newCardToRemember);
 			onHandleCardsToFind(newCardToRemember);
 		}
@@ -73,10 +74,30 @@ function GameTask({
 	const clearMarkedCard = card => {
 		card.style.backgroundColor = 'transparent';
 	};
+
+	const cardsDimension = () => {
+		if (gameAreaSize.length === 9) {
+			return {
+				width: '30px',
+				height: '30px',
+			};
+		} else if (gameAreaSize.length === 16) {
+			return {
+				width: '20px',
+				height: '20px',
+			};
+		} else if (gameAreaSize.length === 25) {
+			return {
+				width: '15px',
+				height: '15px',
+			};
+		}
+	};
+
 	return (
 		<div className={styles.game}>
 			<div className={styles.steps}>
-				{gameSteps.map((id, i) => (
+				{allGameLevels.map((id, i) => (
 					<div
 						className={`${styles.oneStep}`}
 						id={`step.${i}`}
@@ -88,9 +109,10 @@ function GameTask({
 				))}
 			</div>
 			<div className={styles.gameArea}>
-				{gameSize.map((id, i) => (
+				{gameAreaSize.map((id, i) => (
 					<div
 						className={styles.oneCard}
+						style={cardsDimension()}
 						id={`card.${i}`}
 						key={`card.${i}`}
 						ref={cards.current[i]}

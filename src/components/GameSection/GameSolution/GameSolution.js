@@ -3,16 +3,15 @@ import GameArea from '../GameArea/GameArea';
 import styles from './GameSolution.module.css';
 
 function GameSolution({
+	gameAreaSize,
+	allGameLevels,
 	onHandleSelectedCard,
 	countCorrectSelected,
-	gameLevel,
-	selectedCard,
 }) {
-	const gameSize = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 	const gameSteps = [1, 2, 3, 4, 5, 6];
 	const [lastChoise, setLastChoise] = useState(null);
-	const cards = useRef(gameSize.map(() => React.createRef()));
-	const steps = useRef(gameSteps.map(() => React.createRef()));
+	const cards = useRef(gameAreaSize.map(() => React.createRef()));
+	const steps = useRef(allGameLevels.map(() => React.createRef()));
 
 	useEffect(() => {
 		if (lastChoise) {
@@ -46,10 +45,29 @@ function GameSolution({
 		setLastChoise(e.target);
 		onHandleSelectedCard(e);
 	};
+
+	const cardsDimension = () => {
+		if (gameAreaSize.length === 9) {
+			return {
+				width: '30px',
+				height: '30px',
+			};
+		} else if (gameAreaSize.length === 16) {
+			return {
+				width: '20px',
+				height: '20px',
+			};
+		} else if (gameAreaSize.length === 25) {
+			return {
+				width: '15px',
+				height: '15px',
+			};
+		}
+	};
 	return (
 		<div className={styles.game}>
 			<div className={styles.steps}>
-				{gameSteps.map((id, i) => (
+				{allGameLevels.map((id, i) => (
 					<div
 						className={`${styles.oneStep}`}
 						key={id}
@@ -61,9 +79,10 @@ function GameSolution({
 				))}
 			</div>
 			<div className={styles.gameArea}>
-				{gameSize.map((id, i) => (
+				{gameAreaSize.map((id, i) => (
 					<div
 						className={styles.oneCard}
+						style={cardsDimension()}
 						key={id}
 						id={`card.${i}`}
 						ref={cards.current[i]}
