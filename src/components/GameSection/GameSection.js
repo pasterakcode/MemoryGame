@@ -35,49 +35,60 @@ function GameSection({ gameAreaSize, allGameLevels }) {
 
 	useEffect(() => {
 		if (selectedCard.length > 0) {
-			let lastSelected = selectedCard.length - 1;
-			if (selectedCard[lastSelected].id === cardsToFind[lastSelected].id) {
-				console.log(`ok`);
-				setCountCorrectSelected(prev => prev + 1);
-				if (selectedCard.length === cardsToFind.length) {
-					setSelectedCard([]);
-					handleGameLevel();
-					setTimeout(() => {
-						setCountCorrectSelected(0);
-					}, 500);
-				}
-			} else {
-				console.log(`nok`);
-				setCountCorrectSelected(false);
-				setGameOver(true);
-			}
+			isSelectedCardCorrect();
 		}
 	}, [selectedCard]);
 
+	const isSelectedCardCorrect = () => {
+		let lastSelected = selectedCard.length - 1;
+		if (selectedCard[lastSelected].id === cardsToFind[lastSelected].id) {
+			setCountCorrectSelected(prev => prev + 1);
+			if (selectedCard.length === cardsToFind.length) {
+				setSelectedCard([]);
+				handleGameLevel();
+				// setTimeout(() => {
+				// 	setCountCorrectSelected(0);
+				// }, 500);
+			}
+		} else {
+			setCountCorrectSelected(false);
+			setGameOver(true);
+		}
+	};
 	return (
 		<div className={styles.gameSection}>
 			<GameActions
 				onHandleStartGame={handleStartGame}
 				onHandleResetGame={handleResetGame}
 			/>
-			<GameTask
-				gameAreaSize={gameAreaSize}
-				allGameLevels={allGameLevels}
-				selectedCard={selectedCard}
-				startGame={startGame}
-				gameLevel={gameLevel}
-				onHandleGameLevel={handleGameLevel}
-				cardsToFind={cardsToFind}
-				onHandleCardsToFind={handleCardsToFind}
-			/>
-			<GameSolution
-				gameAreaSize={gameAreaSize}
-				allGameLevels={allGameLevels}
-				onHandleSelectedCard={e => handleSelectedCard(e)}
-				countCorrectSelected={countCorrectSelected}
-				gameLevel={gameLevel}
-				selectedCard={selectedCard}
-			/>
+			<div className={styles.oneGameSection}>
+				<h6>task</h6>
+				<>
+					<GameTask
+						gameAreaSize={gameAreaSize}
+						allGameLevels={allGameLevels}
+						selectedCard={selectedCard}
+						startGame={startGame}
+						gameLevel={gameLevel}
+						onHandleGameLevel={handleGameLevel}
+						cardsToFind={cardsToFind}
+						onHandleCardsToFind={handleCardsToFind}
+					/>
+				</>
+			</div>
+			<div className={styles.oneGameSection}>
+				<h6>solution</h6>
+				<>
+					<GameSolution
+						gameAreaSize={gameAreaSize}
+						allGameLevels={allGameLevels}
+						onHandleSelectedCard={e => handleSelectedCard(e)}
+						countCorrectSelected={countCorrectSelected}
+						gameLevel={gameLevel}
+						selectedCard={selectedCard}
+					/>
+				</>
+			</div>
 			{gameOver && <p>Przegrałeś! Twój wynik: {cardsToFind.length - 1}</p>}
 		</div>
 	);

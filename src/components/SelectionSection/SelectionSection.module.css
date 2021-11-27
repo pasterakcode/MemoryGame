@@ -1,11 +1,22 @@
 .selectionSection {
-    border-bottom: 2px solid white;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid tomato;
+	border-bottom: 2px solid white;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 .options {
-    display: flex;
-    flex-direction: column;
-    padding: 5px;
+	display: flex;
+	flex-direction: column;
+	padding: 5px;
+}
+.titleSelectSection {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform: rotateZ(-90deg);
+	font-size: 2rem;
+	height: 3rem;
+    width: 3rem;
+	text-transform: uppercase;
+	color: white;
 }

@@ -1,24 +1,32 @@
 .OptionsSizeGame {
     border-bottom: 1px solid white;
     display: flex;
-    justify-content: center;
+    align-items: center;
     margin-bottom: 1rem;
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.subTitle {
+    transform: rotateZ(-90deg);
+    color: white;
+    text-transform: uppercase;
+    font-size: 2rem;
 }
 
 .selectionCard {
-    height: 50px;
-    width: 50px;
-    border: 1px solid white;
+    height: 40px;
+    width: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: .5rem;
-    background-color: white;
-}
-.selectionCard span {
-    font-size: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    color: whitesmoke;
+    font-size: 1.6rem;
     font-weight: bold;
+    border: 2px solid white;
+    border-radius: 10px;
+    background-color: transparent;
 }

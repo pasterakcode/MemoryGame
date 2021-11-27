@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import GameArea from '../GameArea/GameArea';
 import styles from './GameSolution.module.css';
 
 function GameSolution({
@@ -8,7 +7,6 @@ function GameSolution({
 	onHandleSelectedCard,
 	countCorrectSelected,
 }) {
-	const gameSteps = [1, 2, 3, 4, 5, 6];
 	const [lastChoise, setLastChoise] = useState(null);
 	const cards = useRef(gameAreaSize.map(() => React.createRef()));
 	const steps = useRef(allGameLevels.map(() => React.createRef()));

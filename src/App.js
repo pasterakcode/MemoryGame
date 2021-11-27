@@ -6,8 +6,10 @@ import GameSection from './components/GameSection/GameSection';
 import Footer from './components/Footer/Footer';
 
 function App() {
-	const [gameAreaSize, setGameAreaSize] = useState(null);
-	const [allGameLevels, setAllGameLevels] = useState(null);
+	// const [gameAreaSize, setGameAreaSize] = useState(null);
+	// const [allGameLevels, setAllGameLevels] = useState(null);
+	const [gameAreaSize, setGameAreaSize] = useState([1,2,3,4,5,6,7,8,9]);
+	const [allGameLevels, setAllGameLevels] = useState([1,2,3,4,5,6]);
 
 	const handleGameAreaSize = size => {
 		const arrayOfDigitsForGameAreaSize = fillerOfArray(size);

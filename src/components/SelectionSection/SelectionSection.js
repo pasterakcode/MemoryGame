@@ -6,7 +6,9 @@ import styles from './SelectionSection.module.css';
 function SelectionSection({ onHandleGameAreaSize, onHandleAllGameLevels }) {
 	return (
 		<div className={styles.selectionSection}>
-			<h3>Make choise</h3>
+			<div className={styles.titleSelectSection}>
+				<h3>Options</h3>
+			</div>
 			<div className={styles.options}>
 				<OptionsSizeGame onHandleGameAreaSize={onHandleGameAreaSize} />
 				<OptionsStepsGame onHandleAllGameLevels={onHandleAllGameLevels} />

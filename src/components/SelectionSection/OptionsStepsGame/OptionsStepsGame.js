@@ -10,20 +10,25 @@ function OptionsStepsGame({ onHandleAllGameLevels }) {
 
 	return (
 		<div className={styles.OptionsStepsGame}>
-			<form>
-				<label>
-					<input
-						type='range'
-						id='levels'
-						name='levels'
-						min='1'
-						max='10'
-						value={inputValue}
-						onChange={handleInputValue}
-					/>
-					{inputValue}
-				</label>
-			</form>
+			<div className={styles.subTitle} >
+				<h6>level</h6>
+			</div>
+			<div className={styles.input} >
+				<form>
+					<label>
+						<input
+							type='range'
+							id='levels'
+							name='levels'
+							min='1'
+							max='10'
+							value={inputValue}
+							onChange={handleInputValue}
+						/>
+						<span>{inputValue}</span>
+					</label>
+				</form>
+			</div>
 		</div>
 	);
 }
