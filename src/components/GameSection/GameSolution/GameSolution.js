@@ -6,6 +6,8 @@ function GameSolution({
 	allGameLevels,
 	onHandleSelectedCard,
 	countCorrectSelected,
+	cardsDimension,
+	levelCounterDimension
 }) {
 	const [lastChoise, setLastChoise] = useState(null);
 	const cards = useRef(gameAreaSize.map(() => React.createRef()));
@@ -32,7 +34,7 @@ function GameSolution({
 	};
 	const clearMarkedAllSteps = () => {
 		steps.current.forEach(el => {
-			el.current.style.backgroundColor = 'white';
+			el.current.style.backgroundColor = 'transparent';
 		});
 	};
 	const clearMarkedCard = card => {
@@ -44,30 +46,13 @@ function GameSolution({
 		onHandleSelectedCard(e);
 	};
 
-	const cardsDimension = () => {
-		if (gameAreaSize.length === 9) {
-			return {
-				width: '30px',
-				height: '30px',
-			};
-		} else if (gameAreaSize.length === 16) {
-			return {
-				width: '20px',
-				height: '20px',
-			};
-		} else if (gameAreaSize.length === 25) {
-			return {
-				width: '15px',
-				height: '15px',
-			};
-		}
-	};
 	return (
 		<div className={styles.game}>
 			<div className={styles.steps}>
 				{allGameLevels.map((id, i) => (
 					<div
 						className={`${styles.oneStep}`}
+						style={levelCounterDimension()}
 						key={id}
 						id={`step.${id}`}
 						ref={steps.current[i]}

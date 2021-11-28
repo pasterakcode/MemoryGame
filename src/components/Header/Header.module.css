@@ -1,32 +1,20 @@
 .headerBar {
     position: absolute;
-    width: 80vw;
-    background-color: tomato;
-    height: 2rem;
+    width: 100vw;
+    height: 4rem;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom: 2px solid white;;
 }
-.headerBar::after {
-    content: ' ';
-    position: absolute;
-    left: -3rem;
-    top: 0;
-    width: 0;
-    height: 0;
-    border-top: 2rem solid tomato;
-    border-left: 3rem solid transparent;
-}
-.headerBar::before {
-    content: ' ';
-    position: absolute;
-    right: -3rem;
-    top: 0;
-    width: 0;
-    height: 0;
-    border-top: 2rem solid tomato;
-    border-right: 3rem solid transparent;
+.headerBar p {
+    margin: 0;
+    padding: 0;
+    color: whitesmoke;
+    font-size: 2.5rem;
+    font-weight: normal;
+    text-transform: uppercase;
 }

@@ -6,11 +6,16 @@ import GameSection from './components/GameSection/GameSection';
 import Footer from './components/Footer/Footer';
 
 function App() {
-	// const [gameAreaSize, setGameAreaSize] = useState(null);
-	// const [allGameLevels, setAllGameLevels] = useState(null);
-	const [gameAreaSize, setGameAreaSize] = useState([1,2,3,4,5,6,7,8,9]);
-	const [allGameLevels, setAllGameLevels] = useState([1,2,3,4,5,6]);
+	const [startGame, setStartGame] = useState(false);
+	const [gameAreaSize, setGameAreaSize] = useState(null);
+	const [allGameLevels, setAllGameLevels] = useState(null);
+	// const [startGame, setStartGame] = useState(true);
+	// const [gameAreaSize, setGameAreaSize] = useState([1,2,3,4,5,6,7,8,9]);
+	// const [allGameLevels, setAllGameLevels] = useState([1,2,3,4,5,6,7,8,9,10]);
 
+	const handleStartGame = () => {
+		gameAreaSize && allGameLevels && setStartGame(!startGame);
+	};
 	const handleGameAreaSize = size => {
 		const arrayOfDigitsForGameAreaSize = fillerOfArray(size);
 		setGameAreaSize(arrayOfDigitsForGameAreaSize);
@@ -34,8 +39,15 @@ function App() {
 				<SelectionSection
 					onHandleGameAreaSize={handleGameAreaSize}
 					onHandleAllGameLevels={handleAllGameLevels}
+					onHandleStartGame={handleStartGame}
+					startGame={startGame}
 				/>
-				{gameAreaSize && allGameLevels && <GameSection gameAreaSize={gameAreaSize} allGameLevels={allGameLevels} />}
+				<GameSection
+					startGame={startGame}
+					gameAreaSize={gameAreaSize}
+					allGameLevels={allGameLevels}
+					onHandleStartGame={handleStartGame}
+				/>
 			</div>
 			<Footer />
 		</div>

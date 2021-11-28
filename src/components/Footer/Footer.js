@@ -4,7 +4,7 @@ import styles from './Footer.module.css'
 function Footer () {
     return (
         <div className={styles.footerBar}>
-            Footer
+          <p>&copy; 2021 Paweł Pasterak</p>  
         </div>
     )
 }

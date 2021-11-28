@@ -1,11 +1,13 @@
 .OptionsSizeGame {
     border-bottom: 1px solid white;
     display: flex;
+    width: 100%;
     align-items: center;
     margin-bottom: 1rem;
 }
 .buttons {
     display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
 }

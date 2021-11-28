@@ -4,22 +4,25 @@ import GameSolution from './GameSolution/GameSolution';
 import GameTask from './GameTask/GameTask';
 import styles from './GameSection.module.css';
 
-function GameSection({ gameAreaSize, allGameLevels }) {
-	const [startGame, setStartGame] = useState(false);
+function GameSection({
+	startGame,
+	onHandleStartGame,
+	gameAreaSize,
+	allGameLevels,
+}) {
 	const [gameLevel, setGameLevel] = useState(0);
 	const [cardsToFind, setCardsToFind] = useState([]);
 	const [selectedCard, setSelectedCard] = useState([]);
 	const [gameOver, setGameOver] = useState(false);
+	const [victory, setVictory] = useState(false);
 	const [countCorrectSelected, setCountCorrectSelected] = useState(false);
 
-	const handleStartGame = () => {
-		setStartGame(true);
-	};
 	const handleResetGame = () => {
 		setGameOver(false);
-		setStartGame(false);
+		onHandleStartGame();
 		setSelectedCard([]);
 		setCardsToFind([]);
+		setVictory(false);
 		setGameLevel(0);
 	};
 	const handleGameLevel = () => {
@@ -43,53 +46,93 @@ function GameSection({ gameAreaSize, allGameLevels }) {
 		let lastSelected = selectedCard.length - 1;
 		if (selectedCard[lastSelected].id === cardsToFind[lastSelected].id) {
 			setCountCorrectSelected(prev => prev + 1);
-			if (selectedCard.length === cardsToFind.length) {
-				setSelectedCard([]);
-				handleGameLevel();
-				// setTimeout(() => {
-				// 	setCountCorrectSelected(0);
-				// }, 500);
+			if (!isEndGame()) {
+				setTimeout(() => {
+					isEndLevel();
+				}, 500);
 			}
 		} else {
 			setCountCorrectSelected(false);
 			setGameOver(true);
 		}
 	};
+	const isEndLevel = () => {
+		if (selectedCard.length === cardsToFind.length) {
+			setSelectedCard([]);
+			handleGameLevel();
+			setCountCorrectSelected(0);
+		}
+	};
+	const isEndGame = () => {
+		if (selectedCard.length === allGameLevels.length) {
+			setVictory(true);
+			setGameOver(true);
+			return true;
+		} else {
+			return false;
+		}
+	};
+	const cardsDimension = () => {
+		const dimension = 165 / Math.sqrt(gameAreaSize.length);
+		return {
+			width: dimension + 'px',
+			height: dimension + 'px',
+		};
+	};
+	const levelCounterDimension = () => {
+		const dimension = 165 / Math.sqrt(allGameLevels.length);
+		return {
+			height: dimension + 'px',
+		};
+	};
 	return (
 		<div className={styles.gameSection}>
 			<GameActions
-				onHandleStartGame={handleStartGame}
+				onHandleStartGame={onHandleStartGame}
 				onHandleResetGame={handleResetGame}
+				startGame={startGame}
+				gameOver={gameOver}
 			/>
-			<div className={styles.oneGameSection}>
-				<h6>task</h6>
+			{startGame && (
 				<>
-					<GameTask
-						gameAreaSize={gameAreaSize}
-						allGameLevels={allGameLevels}
-						selectedCard={selectedCard}
-						startGame={startGame}
-						gameLevel={gameLevel}
-						onHandleGameLevel={handleGameLevel}
-						cardsToFind={cardsToFind}
-						onHandleCardsToFind={handleCardsToFind}
-					/>
+					<div className={styles.oneGameSection}>
+						<h6>task</h6>
+						<GameTask
+							gameAreaSize={gameAreaSize}
+							allGameLevels={allGameLevels}
+							selectedCard={selectedCard}
+							startGame={startGame}
+							gameLevel={gameLevel}
+							onHandleGameLevel={handleGameLevel}
+							cardsToFind={cardsToFind}
+							onHandleCardsToFind={handleCardsToFind}
+							cardsDimension={cardsDimension}
+							levelCounterDimension={levelCounterDimension}
+							gameOver={gameOver}
+							victory={victory}
+						/>
+					</div>
+					<div className={styles.oneGameSection}>
+						<h6>solution</h6>
+						<GameSolution
+							gameAreaSize={gameAreaSize}
+							allGameLevels={allGameLevels}
+							onHandleSelectedCard={e => handleSelectedCard(e)}
+							countCorrectSelected={countCorrectSelected}
+							gameLevel={gameLevel}
+							selectedCard={selectedCard}
+							cardsDimension={cardsDimension}
+							levelCounterDimension={levelCounterDimension}
+						/>
+					</div>
 				</>
-			</div>
-			<div className={styles.oneGameSection}>
-				<h6>solution</h6>
-				<>
-					<GameSolution
-						gameAreaSize={gameAreaSize}
-						allGameLevels={allGameLevels}
-						onHandleSelectedCard={e => handleSelectedCard(e)}
-						countCorrectSelected={countCorrectSelected}
-						gameLevel={gameLevel}
-						selectedCard={selectedCard}
-					/>
-				</>
-			</div>
-			{gameOver && <p>Przegrałeś! Twój wynik: {cardsToFind.length - 1}</p>}
+			)}
+			<h3 className={styles.gameOverInformation}>
+				{gameOver &&
+					(victory
+						? `You Won! Your Score: ${cardsToFind.length}`
+						: `You lost! Your Score: ${cardsToFind.length - 1}`)}
+			</h3>
 		</div>
 	);
 }

@@ -1,11 +1,21 @@
 import React from 'react';
 import styles from './GameActions.module.css';
 
-function GameActions( { onHandleStartGame, onHandleResetGame } ) {
+function GameActions({
+	onHandleStartGame,
+	onHandleResetGame,
+	startGame,
+	gameOver,
+}) {
 	return (
 		<div className={styles.gameActions}>
-			<button onClick={onHandleStartGame}>Start</button>
-			<button onClick={onHandleResetGame}>Reset</button>
+			{!startGame && <button onClick={onHandleStartGame}>Start</button>}
+			{startGame && (
+				<>
+					{gameOver && <button onClick={onHandleResetGame}>Reset</button>}
+					<button onClick={onHandleStartGame}>End</button>
+				</>
+			)}
 		</div>
 	);
 }

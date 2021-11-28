@@ -8,15 +8,14 @@
 }
 
 .mainSection {
-  background-color: rgba(15, 6, 41, 0.664);
+  background-color: rgba(19, 15, 32, 0.664);
   border-radius: 10px;
   border: 1px solid white;
   box-shadow: 2px 2px 5px white;
-  height: 85vh;
-  width: 85%;
   border-radius: 15px;
   padding: .5rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }

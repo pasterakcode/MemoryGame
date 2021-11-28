@@ -1,9 +1,11 @@
 .OptionsStepsGame {
     display: flex;
     padding: 5px 0px;
+    width: 100%;
 }
 .OptionsStepsGame .input{
     display: flex;
+    width: 100%;
     justify-content: center;
     z-index: 10;
 }
