@@ -13,7 +13,6 @@ function GameActions({
 			{startGame && (
 				<>
 					{gameOver && <button onClick={onHandleResetGame}>Reset</button>}
-					<button onClick={onHandleStartGame}>End</button>
 				</>
 			)}
 		</div>

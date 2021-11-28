@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from './GameTask.module.css';
 
 function GameTask({
@@ -29,13 +29,12 @@ function GameTask({
 		if (gameLevel > 0) {
 			let newCardToRemember =
 				cards.current[getRandomInt(gameAreaSize.length)].current;
-			console.log(newCardToRemember);
 			onHandleCardsToFind(newCardToRemember);
 		}
 	}, [gameLevel]);
 
 	useEffect(() => {
-		oneGameTask(gameLevel);
+		oneLevelTask(gameLevel);
 	}, [cardsToFind, gameOver]);
 
 	const getRandomInt = max => {
@@ -47,12 +46,13 @@ function GameTask({
 			await callback(array[index], index, array);
 		}
 	};
-	const oneGameTask = async newLevel => {
+	const oneLevelTask = async newLevel => {
 		newLevel > 1 && markADoneLevel(newLevel - 2);
 		let counter = 0;
 		await asyncForEach(cardsToFind, async cardToFindInThisStep => {
 			if (counter <= newLevel) {
 				await waitFor(750);
+				markCardOnGreen(cardToFindInThisStep, counter);
 				if (!gameOver) {
 					markStepOnYellow(newLevel - 1);
 				} else {
@@ -60,15 +60,16 @@ function GameTask({
 						markADoneLevel(newLevel - 1);
 					} else {
 						markStepOnRed(newLevel - 1);
+						clearMarkedCard(cardsToFind[cardsToFind.length - 1]);
 					}
 				}
-				markCardOnGreen(cardToFindInThisStep, counter);
-				await waitFor(1000);
+				await waitFor(500);
 				clearMarkedCard(cardToFindInThisStep);
 				counter++;
 			}
 		});
 	};
+
 	const markADoneLevel = doneLevel => {
 		markStepOnGreen(doneLevel);
 	};

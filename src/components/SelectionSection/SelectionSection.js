@@ -7,6 +7,7 @@ function SelectionSection({
 	startGame,
 	onHandleGameAreaSize,
 	onHandleAllGameLevels,
+	optionsSelectedByDefault,
 }) {
 	return (
 		<>
@@ -16,8 +17,14 @@ function SelectionSection({
 						<h3>Options</h3>
 					</div>
 					<div className={styles.options}>
-						<OptionsSizeGame onHandleGameAreaSize={onHandleGameAreaSize} />
-						<OptionsStepsGame onHandleAllGameLevels={onHandleAllGameLevels} />
+						<OptionsSizeGame
+							onHandleGameAreaSize={onHandleGameAreaSize}
+							optionsSelectedByDefault={optionsSelectedByDefault}
+						/>
+						<OptionsStepsGame
+							onHandleAllGameLevels={onHandleAllGameLevels}
+							optionsSelectedByDefault={optionsSelectedByDefault}
+						/>
 					</div>
 				</div>
 			)}

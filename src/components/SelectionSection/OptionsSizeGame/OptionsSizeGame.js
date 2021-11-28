@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './OptionsSizeGame.module.css';
 
-function OptionsSizeGame({ onHandleGameAreaSize }) {
+function OptionsSizeGame({ onHandleGameAreaSize, optionsSelectedByDefault }) {
+	const [selectedButton, setSelectedButton] = useState(null);
+
 	const handleGameAreaSize = e => {
+		markSelectedButton(e.target);
 		const gameSize = e.target.id;
 		onHandleGameAreaSize(gameSize);
 	};
+	const markSelectedButton = button => {
+		selectedButton && (selectedButton.style.backgroundColor = 'transparent');
+		setSelectedButton(button);
+		button.style.backgroundColor = 'gray';
+	}
+	useEffect(() => {
+		if(optionsSelectedByDefault.size){
+			const defalutSizeGame = optionsSelectedByDefault.size;
+			markSelectedButton(document.getElementById(defalutSizeGame))
+			onHandleGameAreaSize(defalutSizeGame);
+		}
+	}, [])
+	
 
 	return (
 		<div className={styles.OptionsSizeGame}>

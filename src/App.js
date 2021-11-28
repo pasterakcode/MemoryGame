@@ -1,4 +1,4 @@
-import react, { useState } from 'react';
+import { useState } from 'react';
 import styles from './App.module.css';
 import Header from './components/Header/Header';
 import SelectionSection from './components/SelectionSection/SelectionSection';
@@ -9,9 +9,7 @@ function App() {
 	const [startGame, setStartGame] = useState(false);
 	const [gameAreaSize, setGameAreaSize] = useState(null);
 	const [allGameLevels, setAllGameLevels] = useState(null);
-	// const [startGame, setStartGame] = useState(true);
-	// const [gameAreaSize, setGameAreaSize] = useState([1,2,3,4,5,6,7,8,9]);
-	// const [allGameLevels, setAllGameLevels] = useState([1,2,3,4,5,6,7,8,9,10]);
+	const [optionsSelectedByDefault] = useState({ size: 16, allLevels: 5})
 
 	const handleStartGame = () => {
 		gameAreaSize && allGameLevels && setStartGame(!startGame);
@@ -41,6 +39,7 @@ function App() {
 					onHandleAllGameLevels={handleAllGameLevels}
 					onHandleStartGame={handleStartGame}
 					startGame={startGame}
+					optionsSelectedByDefault={optionsSelectedByDefault}
 				/>
 				<GameSection
 					startGame={startGame}

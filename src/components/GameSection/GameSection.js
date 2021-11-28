@@ -44,16 +44,16 @@ function GameSection({
 
 	const isSelectedCardCorrect = () => {
 		let lastSelected = selectedCard.length - 1;
+		setCountCorrectSelected(prev => prev + 1);
 		if (selectedCard[lastSelected].id === cardsToFind[lastSelected].id) {
-			setCountCorrectSelected(prev => prev + 1);
 			if (!isEndGame()) {
 				setTimeout(() => {
 					isEndLevel();
-				}, 500);
+				}, 250);
 			}
 		} else {
-			setCountCorrectSelected(false);
 			setGameOver(true);
+			setCountCorrectSelected(0);
 		}
 	};
 	const isEndLevel = () => {
@@ -123,6 +123,8 @@ function GameSection({
 							selectedCard={selectedCard}
 							cardsDimension={cardsDimension}
 							levelCounterDimension={levelCounterDimension}
+							gameOver={gameOver}
+							victory={victory}
 						/>
 					</div>
 				</>

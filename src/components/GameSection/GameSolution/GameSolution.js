@@ -7,7 +7,10 @@ function GameSolution({
 	onHandleSelectedCard,
 	countCorrectSelected,
 	cardsDimension,
-	levelCounterDimension
+	levelCounterDimension,
+	gameOver,
+	victory,
+	gameLevel
 }) {
 	const [lastChoise, setLastChoise] = useState(null);
 	const cards = useRef(gameAreaSize.map(() => React.createRef()));
@@ -15,20 +18,21 @@ function GameSolution({
 
 	useEffect(() => {
 		if (lastChoise) {
-			if (countCorrectSelected > 0) {
-				markStepOnGreen(countCorrectSelected - 1);
+			if (!gameOver || victory) {
 				lastChoise.style.backgroundColor = 'green';
-				setTimeout(() => {
-					clearMarkedCard(lastChoise);
-				}, 500);
-			} else if (countCorrectSelected === 0) {
-				clearMarkedAllSteps();
-			} else if (!countCorrectSelected) {
+				countCorrectSelected && markStepOnGreen(countCorrectSelected - 1);
+			} else {
 				lastChoise.style.backgroundColor = 'red';
-				//  zamienić to na klase z rozbłyskiem
 			}
+			setTimeout(() => {
+				clearMarkedCard(lastChoise);
+			}, 250);
 		}
-	}, [countCorrectSelected]);
+	}, [countCorrectSelected, gameOver]);
+
+	useEffect(() => {
+		clearMarkedAllSteps();
+	}, [gameLevel])
 	const markStepOnGreen = id => {
 		steps.current[id].current.style.backgroundColor = 'green';
 	};
