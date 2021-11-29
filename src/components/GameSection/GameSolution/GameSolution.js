@@ -10,7 +10,8 @@ function GameSolution({
 	levelCounterDimension,
 	gameOver,
 	victory,
-	gameLevel
+	gameLevel,
+	waitingOnUserMove
 }) {
 	const [lastChoise, setLastChoise] = useState(null);
 	const cards = useRef(gameAreaSize.map(() => React.createRef()));
@@ -32,7 +33,7 @@ function GameSolution({
 
 	useEffect(() => {
 		clearMarkedAllSteps();
-	}, [gameLevel])
+	}, [gameLevel]);
 	const markStepOnGreen = id => {
 		steps.current[id].current.style.backgroundColor = 'green';
 	};
@@ -66,6 +67,7 @@ function GameSolution({
 				))}
 			</div>
 			<div className={styles.gameArea}>
+				{!waitingOnUserMove && <div className={styles.movementBlocker}></div>}
 				{gameAreaSize.map((id, i) => (
 					<div
 						className={styles.oneCard}

@@ -13,6 +13,8 @@ function GameTask({
 	levelCounterDimension,
 	gameOver,
 	victory,
+	onHandleWaitingMovementOfUser,
+	onHandleBlockingMovementOfUser
 }) {
 	const cards = useRef(gameAreaSize.map(() => React.createRef()));
 	const steps = useRef(allGameLevels.map(() => React.createRef()));
@@ -47,6 +49,7 @@ function GameTask({
 		}
 	};
 	const oneLevelTask = async newLevel => {
+		onHandleBlockingMovementOfUser();
 		newLevel > 1 && markADoneLevel(newLevel - 2);
 		let counter = 0;
 		await asyncForEach(cardsToFind, async cardToFindInThisStep => {
@@ -68,6 +71,7 @@ function GameTask({
 				counter++;
 			}
 		});
+		!gameOver && onHandleWaitingMovementOfUser();
 	};
 
 	const markADoneLevel = doneLevel => {

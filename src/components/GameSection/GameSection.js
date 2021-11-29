@@ -16,6 +16,7 @@ function GameSection({
 	const [gameOver, setGameOver] = useState(false);
 	const [victory, setVictory] = useState(false);
 	const [countCorrectSelected, setCountCorrectSelected] = useState(false);
+	const [waitingOnUserMove, setWaitingOnUserMove] = useState(false)
 
 	const handleResetGame = () => {
 		setGameOver(false);
@@ -35,6 +36,12 @@ function GameSection({
 		let newSelectedCard = e.target;
 		setSelectedCard(prev => [...prev, newSelectedCard]);
 	};
+	const handleWaitingMovementOfUser = () => {
+		setWaitingOnUserMove(true);
+	}
+	const handleBlockingMovementOfUser = () => {
+		setWaitingOnUserMove(false);
+	}
 
 	useEffect(() => {
 		if (selectedCard.length > 0) {
@@ -92,9 +99,10 @@ function GameSection({
 				onHandleResetGame={handleResetGame}
 				startGame={startGame}
 				gameOver={gameOver}
+				waitingOnUserMove={waitingOnUserMove}
 			/>
 			{startGame && (
-				<>
+				<div className={styles.allGameSection}>
 					<div className={styles.oneGameSection}>
 						<h6>task</h6>
 						<GameTask
@@ -110,10 +118,12 @@ function GameSection({
 							levelCounterDimension={levelCounterDimension}
 							gameOver={gameOver}
 							victory={victory}
+							onHandleWaitingMovementOfUser={handleWaitingMovementOfUser}
+							onHandleBlockingMovementOfUser={handleBlockingMovementOfUser}
 						/>
 					</div>
 					<div className={styles.oneGameSection}>
-						<h6>solution</h6>
+						<h6>Solve</h6>
 						<GameSolution
 							gameAreaSize={gameAreaSize}
 							allGameLevels={allGameLevels}
@@ -125,9 +135,10 @@ function GameSection({
 							levelCounterDimension={levelCounterDimension}
 							gameOver={gameOver}
 							victory={victory}
+							waitingOnUserMove={waitingOnUserMove}
 						/>
 					</div>
-				</>
+				</div>
 			)}
 			<h3 className={styles.gameOverInformation}>
 				{gameOver &&
