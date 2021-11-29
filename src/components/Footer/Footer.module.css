@@ -1,17 +1,17 @@
 .footerBar {
-    position: absolute;
-    width: 100vw;
-    height: 2rem;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-top: 2px solid white;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 2rem;
+	bottom: 0;
+	left: 50%;
+	border-top: 2px solid white;
+	transform: translateX(-50%);
 }
 .footerBar p {
-    margin: 0;
-    padding: 0;
-    color: whitesmoke;
+	margin: 0;
+	padding: 0;
+	color: whitesmoke;
 }

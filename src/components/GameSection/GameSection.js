@@ -16,8 +16,13 @@ function GameSection({
 	const [gameOver, setGameOver] = useState(false);
 	const [victory, setVictory] = useState(false);
 	const [countCorrectSelected, setCountCorrectSelected] = useState(false);
-	const [waitingOnUserMove, setWaitingOnUserMove] = useState(false)
+	const [waitingOnUserMove, setWaitingOnUserMove] = useState(false);
 
+	useEffect(() => {
+		if (selectedCard.length > 0) {
+			isSelectedCardCorrect();
+		}
+	}, [selectedCard]);
 	const handleResetGame = () => {
 		setGameOver(false);
 		onHandleStartGame();
@@ -38,17 +43,10 @@ function GameSection({
 	};
 	const handleWaitingMovementOfUser = () => {
 		setWaitingOnUserMove(true);
-	}
+	};
 	const handleBlockingMovementOfUser = () => {
 		setWaitingOnUserMove(false);
-	}
-
-	useEffect(() => {
-		if (selectedCard.length > 0) {
-			isSelectedCardCorrect();
-		}
-	}, [selectedCard]);
-
+	};
 	const isSelectedCardCorrect = () => {
 		let lastSelected = selectedCard.length - 1;
 		setCountCorrectSelected(prev => prev + 1);

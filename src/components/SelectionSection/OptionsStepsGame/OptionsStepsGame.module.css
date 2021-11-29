@@ -1,35 +1,41 @@
 .OptionsStepsGame {
-    display: flex;
-    padding: 5px 0px;
-    width: 100%;
+	display: flex;
+	width: 100%;
+	padding: 5px 0px;
 }
-.OptionsStepsGame .input{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    z-index: 10;
+.OptionsStepsGame .input {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	z-index: 10;
 }
 .subTitle {
-    transform: rotateZ(-90deg);
-    color: white;
-    text-transform: uppercase;
-    font-weight: bold;
+	transform: rotateZ(-90deg);
+	text-transform: uppercase;
+	font-weight: bold;
+	color: white;
+}
+.subTitle h6 {
+	margin: 0;
 }
 .OptionsStepsGame .input label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .input label input {
-    margin-right: .5rem;
+	margin-right: 0.5rem;
 }
-
+input[type='range']::-webkit-slider-runnable-track {
+	cursor: pointer;
+	background-color: transparent;
+}
 .OptionsStepsGame .input label span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: whitesmoke;
-    font-size: 2rem;
-    font-weight: bold;
-    width: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 2rem;
+	font-size: 2rem;
+	font-weight: bold;
+	color: whitesmoke;
 }

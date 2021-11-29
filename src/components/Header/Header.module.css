@@ -1,20 +1,20 @@
 .headerBar {
-    position: absolute;
-    width: 100vw;
-    height: 4rem;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 2px solid white;;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 50%;
+	width: 100vw;
+	height: 4rem;
+	border-bottom: 2px solid white;
+	transform: translateX(-50%);
 }
 .headerBar p {
-    margin: 0;
-    padding: 0;
-    color: whitesmoke;
-    font-size: 2.5rem;
-    font-weight: normal;
-    text-transform: uppercase;
+	margin: 0;
+	padding: 0;
+	font-size: 2.5rem;
+	font-weight: normal;
+	text-transform: uppercase;
+	color: whitesmoke;
 }

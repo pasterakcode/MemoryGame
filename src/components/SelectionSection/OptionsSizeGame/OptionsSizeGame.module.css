@@ -16,8 +16,9 @@
     color: white;
     text-transform: uppercase;
     font-size: 2rem;
+    display: flex;
+    justify-content: flex-start;
 }
-
 .selectionCard {
     height: 40px;
     width: 40px;

@@ -11,7 +11,7 @@ function GameSolution({
 	gameOver,
 	victory,
 	gameLevel,
-	waitingOnUserMove
+	waitingOnUserMove,
 }) {
 	const [lastChoise, setLastChoise] = useState(null);
 	const cards = useRef(gameAreaSize.map(() => React.createRef()));
@@ -30,7 +30,6 @@ function GameSolution({
 			}, 250);
 		}
 	}, [countCorrectSelected, gameOver]);
-
 	useEffect(() => {
 		clearMarkedAllSteps();
 	}, [gameLevel]);
@@ -45,12 +44,10 @@ function GameSolution({
 	const clearMarkedCard = card => {
 		card.style.backgroundColor = 'transparent';
 	};
-
 	const handleOnClickCard = e => {
 		setLastChoise(e.target);
 		onHandleSelectedCard(e);
 	};
-
 	return (
 		<div className={styles.game}>
 			<div className={styles.steps}>

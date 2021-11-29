@@ -14,7 +14,7 @@ function GameTask({
 	gameOver,
 	victory,
 	onHandleWaitingMovementOfUser,
-	onHandleBlockingMovementOfUser
+	onHandleBlockingMovementOfUser,
 }) {
 	const cards = useRef(gameAreaSize.map(() => React.createRef()));
 	const steps = useRef(allGameLevels.map(() => React.createRef()));
@@ -73,7 +73,6 @@ function GameTask({
 		});
 		!gameOver && onHandleWaitingMovementOfUser();
 	};
-
 	const markADoneLevel = doneLevel => {
 		markStepOnGreen(doneLevel);
 	};

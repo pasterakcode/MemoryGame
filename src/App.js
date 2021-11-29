@@ -6,10 +6,10 @@ import GameSection from './components/GameSection/GameSection';
 import Footer from './components/Footer/Footer';
 
 function App() {
+	const [optionsSelectedByDefault] = useState({ size: 16, allLevels: 5 });
 	const [startGame, setStartGame] = useState(false);
 	const [gameAreaSize, setGameAreaSize] = useState(null);
 	const [allGameLevels, setAllGameLevels] = useState(null);
-	const [optionsSelectedByDefault] = useState({ size: 16, allLevels: 5})
 
 	const handleStartGame = () => {
 		gameAreaSize && allGameLevels && setStartGame(!startGame);

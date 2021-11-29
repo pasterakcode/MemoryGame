@@ -6,15 +6,16 @@ function GameActions({
 	onHandleResetGame,
 	startGame,
 	gameOver,
-	waitingOnUserMove
+	waitingOnUserMove,
 }) {
 	return (
 		<div className={styles.gameActions}>
-			{!startGame && <button onClick={onHandleStartGame}>Start</button>}
-			{startGame && (
-				<>
-					{(gameOver || waitingOnUserMove) && <button onClick={onHandleResetGame}>Reset</button>}
-				</>
+			{!startGame ? (
+				<button onClick={onHandleStartGame}>Start</button>
+			) : (
+				(gameOver || waitingOnUserMove) && (
+					<button onClick={onHandleResetGame}>Reset</button>
+				)
 			)}
 		</div>
 	);
