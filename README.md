@@ -5,6 +5,14 @@ Application desctription:
 
 The player's task is to recreate a string of marked game cards.
 The application has a mobile and desktop version
+
+-----
+
+Online version:
+
+https://amazing-haibt-3186d2.netlify.app/
+
+
 -----
 
 Game instructon:
